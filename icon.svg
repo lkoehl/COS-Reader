@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="108px" height="108px" viewBox="0 0 108 108" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon</title>
+    <defs>
+        <linearGradient x1="1.42093019%" y1="32.4102429%" x2="100%" y2="67.5897571%" id="linearGradient-1">
+            <stop stop-color="#3F2B96" offset="0%"></stop>
+            <stop stop-color="#A8C0FF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="#F2F2F2" x="0" y="0" width="108" height="108"></rect>
+        <g id="Group-4" transform="translate(25.000000, 37.000000)">
+            <g id="Group">
+                <rect id="Rectangle" fill="url(#linearGradient-1)" x="0" y="0" width="57.5686406" height="34.1452969" rx="2.88667969"></rect>
+                <rect id="Rectangle" fill="#333333" x="0" y="23.5058203" width="57.5686406" height="5.60840625"></rect>
+                <text id="€" font-family="SFProRounded-Light, SF Pro Rounded" font-size="16.4953125" font-weight="300" letter-spacing="-0.263924997" fill="#FFFFFF">
+                    <tspan x="16.1573491" y="17.4021016">€</tspan>
+                </text>
+            </g>
+            <g id="Group-3" transform="translate(33.496242, 5.031070)" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.08869063">
+                <path d="M5.97910602,13.0846981 C7.39346086,11.0778041 8.10063828,8.89702107 8.10063828,6.54234907 C8.10063828,4.18767707 7.39346086,2.00689405 5.97910602,0" id="Path"></path>
+                <path d="M2.96744332,1.55195764 C4.18525522,3.12699373 4.79416117,4.74437338 4.79416117,6.40409658 C4.79416117,8.06381978 4.18525522,9.77533563 2.96744332,11.5386441" id="Path-2"></path>
+                <path d="M-1.75809367e-16,3.23699658 C0.867444935,4.55204286 1.3011674,5.64898114 1.3011674,6.52781142 C1.3011674,7.40664171 0.867444935,8.50357999 -1.75809367e-16,9.81862627" id="Path-3"></path>
+            </g>
+        </g>
+    </g>
+</svg>
