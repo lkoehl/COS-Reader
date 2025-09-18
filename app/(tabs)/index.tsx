@@ -1,25 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import { Ionicons } from "@expo/vector-icons";
+import * as Haptics from "expo-haptics";
+import { Link } from "expo-router";
+import React, { useEffect, useState } from "react";
 import {
-  View,
-  StyleSheet,
-  SafeAreaView,
   Alert,
-  StatusBar,
   Pressable,
-} from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Ionicons } from '@expo/vector-icons';
-import * as Haptics from 'expo-haptics';
-import { Link } from 'expo-router';
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  View,
+} from "react-native";
 
-import BalanceDisplay from '@/components/BalanceDisplay';
-import ScanButton from '@/components/ScanButton';
-import CardInfo from '@/components/CardInfo';
-import readCard, { CardData } from '@/helpers/readCard';
-import { Gradients } from '@/constants/theme';
+import BalanceCard from "@/components/BalanceCard";
+import EnhancedBackground from "@/components/EnhancedBackground";
+import ScanButton from "@/components/ScanButton";
+import { CardData } from "@/helpers/readCard";
 
 export default function CardReaderScreen() {
-  const [cardData, setCardData] = useState<CardData>({ balance: '0.00', lastTransaction: '0.00' });
+  const [cardData, setCardData] = useState<CardData>({
+    balance: "0.00",
+    lastTransaction: "0.00",
+  });
   const [isScanning, setIsScanning] = useState(false);
   const [lastScanTime, setLastScanTime] = useState<Date | null>(null);
 
@@ -32,26 +33,26 @@ export default function CardReaderScreen() {
     try {
       setIsScanning(true);
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-      
+
       // For demo purposes, simulate card reading
       // In production, this would call: const data = await readCard();
-      await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate scan time
-      
+      await new Promise((resolve) => setTimeout(resolve, 1500)); // Simulate scan time
+
       const data = {
-        balance: '12.83',
-        lastTransaction: '3.50'
+        balance: "12.83",
+        lastTransaction: "3.50",
       };
-      
+
       setCardData(data);
       setLastScanTime(new Date());
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     } catch (error) {
-      console.error('Card reading error:', error);
+      console.error("Card reading error:", error);
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
       Alert.alert(
-        'Fehler beim Scannen',
-        'Die Karte konnte nicht gelesen werden. Bitte versuchen Sie es erneut.',
-        [{ text: 'OK' }]
+        "Fehler beim Scannen",
+        "Die Karte konnte nicht gelesen werden. Bitte versuchen Sie es erneut.",
+        [{ text: "OK" }]
       );
     } finally {
       setIsScanning(false);
@@ -65,12 +66,7 @@ export default function CardReaderScreen() {
   return (
     <>
       <StatusBar barStyle="light-content" />
-      <LinearGradient
-        colors={Gradients.primary as [string, string]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.container}
-      >
+      <EnhancedBackground variant="primary">
         <SafeAreaView style={styles.safeArea}>
           {/* Header with settings button */}
           <View style={styles.header}>
@@ -86,25 +82,21 @@ export default function CardReaderScreen() {
 
           {/* Main content */}
           <View style={styles.content}>
-            <View style={styles.balanceContainer}>
-              <BalanceDisplay balance={cardData.balance} />
-              <CardInfo 
-                lastTransaction={cardData.lastTransaction}
-                lastScanTime={lastScanTime || undefined}
-                style={styles.cardInfo}
-              />
-            </View>
+            <BalanceCard
+              balance={cardData.balance}
+              lastTransaction={cardData.lastTransaction}
+              lastScanTime={lastScanTime || undefined}
+              isScanning={isScanning}
+              style={styles.balanceCard}
+            />
           </View>
 
           {/* Bottom scan button */}
           <View style={styles.footer}>
-            <ScanButton 
-              onPress={handleScan}
-              isLoading={isScanning}
-            />
+            <ScanButton onPress={handleScan} isLoading={isScanning} />
           </View>
         </SafeAreaView>
-      </LinearGradient>
+      </EnhancedBackground>
     </>
   );
 }
@@ -117,32 +109,31 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+    flexDirection: "row",
+    justifyContent: "flex-end",
     paddingHorizontal: 20,
     paddingTop: 10,
   },
   settingsButton: {
     padding: 8,
     borderRadius: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
   },
   content: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     paddingHorizontal: 20,
+    paddingBottom: 20, // Etwas mehr Abstand nach unten
   },
-  balanceContainer: {
-    alignItems: 'center',
-    marginBottom: 40,
-  },
-  cardInfo: {
-    marginTop: 20,
+  balanceCard: {
+    width: "100%",
+    maxWidth: 350,
+    marginBottom: 40, // Mehr Abstand zum Button
   },
   footer: {
     paddingHorizontal: 20,
-    paddingBottom: 40,
-    alignItems: 'center',
+    paddingBottom: 50, // Mehr Abstand vom unteren Rand
+    alignItems: "center",
   },
 });

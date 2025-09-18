@@ -24,6 +24,7 @@ A modern React Native/Expo app for reading Mensa card balances via NFC. This is 
 ## Screenshots
 
 The new design features:
+
 - Beautiful purple-blue gradients
 - Large, readable balance display with Euro symbol
 - Modern scan button with loading states
@@ -34,12 +35,14 @@ The new design features:
 ## Changes from Original
 
 ### Visual Design
+
 - **New gradient theme**: Purple-blue gradients replacing the old blue-purple
 - **Enhanced typography**: Better font weights and spacing
 - **Modern components**: Updated buttons, cards, and layouts
 - **Improved accessibility**: Better contrast and readable text sizes
 
 ### Technical Improvements
+
 - **Expo SDK 54**: Latest Expo version with new features
 - **TypeScript**: Full type safety throughout the app
 - **Component architecture**: Modular, reusable components
@@ -47,6 +50,7 @@ The new design features:
 - **Enhanced error handling**: Better user feedback for NFC errors
 
 ### User Experience
+
 - **Haptic feedback**: Tactile responses for button presses
 - **Loading states**: Visual feedback during card scanning
 - **Improved navigation**: Cleaner modal presentation

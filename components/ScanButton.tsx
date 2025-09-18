@@ -1,9 +1,18 @@
-import React from 'react';
-import { Text, StyleSheet, Pressable } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import * as Haptics from 'expo-haptics';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import { Colors, Gradients } from '@/constants/theme';
+import { useColorScheme } from "@/hooks/use-color-scheme";
+import { Ionicons } from "@expo/vector-icons";
+import * as Haptics from "expo-haptics";
+import { LinearGradient } from "expo-linear-gradient";
+import React, { useEffect } from "react";
+import { Pressable, StyleSheet, Text } from "react-native";
+import Animated, {
+  Easing,
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withSequence,
+  withTiming,
+} from "react-native-reanimated";
 
 interface ScanButtonProps {
   onPress: () => void;
@@ -11,66 +20,117 @@ interface ScanButtonProps {
   style?: any;
 }
 
-export default function ScanButton({ onPress, isLoading = false, style }: ScanButtonProps) {
+export default function ScanButton({
+  onPress,
+  isLoading = false,
+  style,
+}: ScanButtonProps) {
   const colorScheme = useColorScheme();
-  
+  const scaleValue = useSharedValue(1);
+  const pulseValue = useSharedValue(0);
+
+  useEffect(() => {
+    if (isLoading) {
+      pulseValue.value = withRepeat(
+        withSequence(
+          withTiming(1, { duration: 800, easing: Easing.ease }),
+          withTiming(0, { duration: 800, easing: Easing.ease })
+        ),
+        -1,
+        false
+      );
+    } else {
+      pulseValue.value = withTiming(0, { duration: 300 });
+    }
+  }, [isLoading]);
+
   const handlePress = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    scaleValue.value = withSequence(
+      withTiming(0.95, { duration: 100 }),
+      withTiming(1, { duration: 100 })
+    );
     onPress();
   };
 
+  const animatedStyle = useAnimatedStyle(() => {
+    const scale = scaleValue.value;
+    const opacity = interpolate(pulseValue.value, [0, 1], [1, 0.7]);
+
+    return {
+      transform: [{ scale }],
+      opacity,
+    };
+  });
+
   return (
-    <Pressable
-      style={({ pressed }) => [
-        styles.container,
-        style,
-        pressed && styles.pressed
-      ]}
-      onPress={handlePress}
-      disabled={isLoading}
-    >
-      <LinearGradient
-        colors={isLoading ? ['#8E8E93', '#8E8E93'] : (Gradients.button as [string, string])}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.gradient}
+    <Animated.View style={[animatedStyle, style]}>
+      <Pressable
+        style={({ pressed }) => [styles.container, pressed && styles.pressed]}
+        onPress={handlePress}
+        disabled={isLoading}
       >
-        <Text style={styles.text}>
-          {isLoading ? 'Wird gescannt...' : 'Karte scannen'}
-        </Text>
-      </LinearGradient>
-    </Pressable>
+        <LinearGradient
+          colors={
+            isLoading
+              ? ["rgba(255, 255, 255, 0.2)", "rgba(255, 255, 255, 0.1)"]
+              : ["rgba(255, 255, 255, 0.25)", "rgba(255, 255, 255, 0.15)"]
+          }
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.gradient}
+        >
+          {isLoading && (
+            <Ionicons name="wifi" size={20} color="white" style={styles.icon} />
+          )}
+          <Text style={[styles.text, isLoading && styles.textWithIcon]}>
+            {isLoading ? "Wird gescannt..." : "Karte scannen"}
+          </Text>
+        </LinearGradient>
+      </Pressable>
+    </Animated.View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 25,
-    overflow: 'hidden',
-    elevation: 4,
-    shadowColor: '#000',
+    borderRadius: 32,
+    overflow: "hidden",
+    elevation: 2,
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 1,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    shadowOpacity: 0.15,
+    shadowRadius: 2,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.3)",
   },
   pressed: {
     transform: [{ scale: 0.98 }],
   },
   gradient: {
-    paddingHorizontal: 32,
-    paddingVertical: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-    minWidth: 200,
-    height: 50,
+    paddingHorizontal: 50,
+    paddingVertical: 22,
+    alignItems: "center",
+    justifyContent: "center",
+    minWidth: 260,
+    height: 64,
+    flexDirection: "row",
+  },
+  icon: {
+    marginRight: 8,
+    marginLeft: -4, // Kompensiert für bessere Zentrierung
   },
   text: {
-    color: 'white',
+    color: "white",
     fontSize: 18,
-    fontWeight: '600',
-    textAlign: 'center',
+    fontWeight: "500",
+    textAlign: "center",
+    flex: 1, // Nimmt verfügbaren Platz für bessere Zentrierung
+  },
+  textWithIcon: {
+    flex: 0, // Keine Flex wenn Icon vorhanden ist
   },
 });

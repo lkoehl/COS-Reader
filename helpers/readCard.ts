@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
-import { APDUApplication, APDUBalance, APDULastTransaction } from './APDU';
 import NfcManager, { NfcTech } from 'react-native-nfc-manager';
+import { APDUApplication, APDUBalance, APDULastTransaction } from './APDU';
 
 export interface CardData {
   balance: string;
@@ -11,7 +11,7 @@ const readCard = async (): Promise<CardData> => {
   try {
     // Initialize NFC if not already done
     await NfcManager.start();
-    
+
     const tech: NfcTech = Platform.OS === 'ios' ? NfcTech.MifareIOS : NfcTech.NfcA;
     await requestTechnology(tech);
 
@@ -36,9 +36,9 @@ const readCard = async (): Promise<CardData> => {
 
     await dismiss(true);
 
-    return { 
-      balance: balanceValue, 
-      lastTransaction: lastTransactionValue 
+    return {
+      balance: balanceValue,
+      lastTransaction: lastTransactionValue
     };
   } catch (error) {
     await dismiss(false);
