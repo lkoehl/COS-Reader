@@ -5,8 +5,8 @@
 
 import { Platform } from 'react-native';
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+const tintColorLight = '#667eea';
+const tintColorDark = '#764ba2';
 
 export const Colors = {
   light: {
@@ -16,6 +16,18 @@ export const Colors = {
     icon: '#687076',
     tabIconDefault: '#687076',
     tabIconSelected: tintColorLight,
+    // Card reader specific colors
+    gradientStart: '#667eea',
+    gradientEnd: '#764ba2',
+    cardBackground: 'rgba(255, 255, 255, 0.1)',
+    textPrimary: '#FFFFFF',
+    textSecondary: 'rgba(255, 255, 255, 0.8)',
+    textTertiary: 'rgba(255, 255, 255, 0.6)',
+    buttonBackground: '#007AFF',
+    buttonBackgroundSecondary: '#5856D6',
+    success: '#34C759',
+    error: '#FF3B30',
+    warning: '#FF9500',
   },
   dark: {
     text: '#ECEDEE',
@@ -24,7 +36,27 @@ export const Colors = {
     icon: '#9BA1A6',
     tabIconDefault: '#9BA1A6',
     tabIconSelected: tintColorDark,
+    // Card reader specific colors
+    gradientStart: '#667eea',
+    gradientEnd: '#764ba2',
+    cardBackground: 'rgba(255, 255, 255, 0.1)',
+    textPrimary: '#FFFFFF',
+    textSecondary: 'rgba(255, 255, 255, 0.8)',
+    textTertiary: 'rgba(255, 255, 255, 0.6)',
+    buttonBackground: '#007AFF',
+    buttonBackgroundSecondary: '#5856D6',
+    success: '#34C759',
+    error: '#FF3B30',
+    warning: '#FF9500',
   },
+};
+
+export const Gradients = {
+  primary: ['#667eea', '#764ba2'],
+  button: ['#007AFF', '#5856D6'],
+  success: ['#34C759', '#30D158'],
+  error: ['#FF3B30', '#FF453A'],
+  warning: ['#FF9500', '#FF9F0A'],
 };
 
 export const Fonts = Platform.select({
