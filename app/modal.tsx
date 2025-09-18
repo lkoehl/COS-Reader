@@ -6,13 +6,13 @@ import React from "react";
 import {
   Linking,
   Pressable,
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SettingsModal() {
   const handleGitHubPress = () => {
