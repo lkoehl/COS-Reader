@@ -2,19 +2,13 @@ import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import { Link } from "expo-router";
 import React, { useEffect, useState } from "react";
-import {
-  Alert,
-  Pressable,
-  StatusBar,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Alert, Pressable, StatusBar, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import BalanceCard from "@/components/BalanceCard";
 import EnhancedBackground from "@/components/EnhancedBackground";
 import ScanButton from "@/components/ScanButton";
-import { CardData } from "@/helpers/readCard";
+import readCard, { CardData } from "@/helpers/readCard";
 
 export default function CardReaderScreen() {
   const [cardData, setCardData] = useState<CardData>({
@@ -25,7 +19,7 @@ export default function CardReaderScreen() {
   const [lastScanTime, setLastScanTime] = useState<Date | null>(null);
 
   useEffect(() => {
-    // Initialize with a demo scan on first load
+    // Start a scan on first load
     handleScan();
   }, []);
 
@@ -34,14 +28,8 @@ export default function CardReaderScreen() {
       setIsScanning(true);
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
 
-      // For demo purposes, simulate card reading
-      // In production, this would call: const data = await readCard();
-      await new Promise((resolve) => setTimeout(resolve, 1500)); // Simulate scan time
-
-      const data = {
-        balance: "12.83",
-        lastTransaction: "3.50",
-      };
+      // Read card via native NFC UI
+      const data = await readCard();
 
       setCardData(data);
       setLastScanTime(new Date());
@@ -129,6 +117,8 @@ const styles = StyleSheet.create({
   balanceCard: {
     width: "100%",
     maxWidth: 350,
+    // Move the card slightly higher on the screen
+    marginTop: -128,
     marginBottom: 40, // Mehr Abstand zum Button
   },
   footer: {

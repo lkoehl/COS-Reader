@@ -34,7 +34,7 @@ const readCard = async (): Promise<CardData> => {
       ).toFixed(2);
     }
 
-    await dismiss(true);
+  await dismiss(true);
 
     return {
       balance: balanceValue,
@@ -48,13 +48,14 @@ const readCard = async (): Promise<CardData> => {
 
 const dismiss = async (success: boolean): Promise<void> => {
   try {
-    await NfcManager.cancelTechnologyRequest();
     if (Platform.OS === 'ios') {
+      // Set the message before cancelling so the native sheet displays it
       NfcManager.setAlertMessageIOS(
-        success ? 'Scannen erfolgreich' : 'Leider ist etwas schiefgegangen.',
+        success ? 'Scannen erfolgreich' : 'Leider ist etwas schiefgegangen.'
       );
     }
-  } catch (error) {
+    await NfcManager.cancelTechnologyRequest();
+  } catch (_) {
     // Ignore cleanup errors
   }
 };

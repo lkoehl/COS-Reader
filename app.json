@@ -2,14 +2,26 @@
   "expo": {
     "name": "COS-Reader",
     "slug": "COS-Reader",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "cosreader",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "de.ppheinz.cos-reader",
+  "buildNumber": "3",
+      "infoPlist": {
+        "NFCReaderUsageDescription": "Diese App benötigt NFC-Zugriff, um Mensakarten zu lesen.",
+        "NSUserTrackingUsageDescription": "Diese App sammelt keine Tracking-Daten.",
+        "ITSAppUsesNonExemptEncryption": false
+      },
+      "entitlements": {
+        "com.apple.developer.nfc.readersession.formats": [
+          "TAG"
+        ]
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -19,7 +31,10 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.NFC"
+      ]
     },
     "web": {
       "output": "static",
@@ -38,12 +53,17 @@
             "backgroundColor": "#000000"
           }
         }
-      ],
-      "react-native-nfc-manager"
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "d5348764-dd42-46f6-a761-863830ee086c"
+      }
     }
   }
 }

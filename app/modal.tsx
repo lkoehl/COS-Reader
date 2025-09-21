@@ -38,7 +38,7 @@ export default function SettingsModal() {
               <Pressable
                 style={styles.closeButton}
                 onPress={handleClosePress}
-                android_ripple={{ color: 'transparent' }}
+                android_ripple={{ color: "transparent" }}
               >
                 <Ionicons name="close" size={26} color="white" />
               </Pressable>
