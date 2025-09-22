@@ -51,9 +51,9 @@ export default function SettingsModal() {
           >
             {/* App Info Section */}
             <View style={styles.section}>
-              <Text style={styles.appName}>COS-Reader</Text>
-              <Text style={styles.version}>Version 1.0.0</Text>
-              <Text style={styles.copyright}>© 2025 Lukas Köhl</Text>
+              <Text style={styles.appName}>MensaScan OS</Text>
+              <Text style={styles.version}>Version 1.1.0</Text>
+              <Text style={styles.copyright}>© 2020 - 2025 Lukas Köhl</Text>
 
               <Pressable
                 style={styles.githubButton}
@@ -104,7 +104,7 @@ export default function SettingsModal() {
             <View style={styles.section}>
               <Text style={styles.sectionHeader}>ÜBER DIE APP</Text>
               <Text style={styles.legalText}>
-                COS-Reader ist eine App zum Auslesen von Mensakarten über NFC.
+                MensaScan OS ist eine App zum Auslesen von Mensakarten über NFC.
                 Die App wurde entwickelt, um schnell und einfach das Guthaben
                 auf Ihrer Mensa-Chipkarte zu überprüfen.
                 {"\n\n"}

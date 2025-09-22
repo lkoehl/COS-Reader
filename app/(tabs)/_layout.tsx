@@ -21,7 +21,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "COS-Reader",
+          title: "MensaScan OS",
           tabBarIcon: ({ color }) => (
             <Ionicons name="card" size={28} color={color} />
           ),
