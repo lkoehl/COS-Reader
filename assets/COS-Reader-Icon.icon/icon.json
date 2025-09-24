@@ -45,8 +45,8 @@
       "layers" : [
         {
           "glass" : true,
-          "image-name" : "Rectangle.svg",
-          "name" : "Rectangle",
+          "image-name" : "1234.svg",
+          "name" : "1234",
           "opacity" : 1,
           "position" : {
             "scale" : 1,
