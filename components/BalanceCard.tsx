@@ -1,5 +1,4 @@
 import { Typography } from "@/constants/theme";
-import { useColorScheme } from "@/hooks/use-color-scheme";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
@@ -21,8 +20,6 @@ export default function BalanceCard({
   isScanning = false,
   style,
 }: BalanceCardProps) {
-  const colorScheme = useColorScheme();
-
   const formatBalance = (balance: string): string => {
     const regex = /^\d{0,3}\.\d{0,2}$/;
     if (!regex.test(balance)) {

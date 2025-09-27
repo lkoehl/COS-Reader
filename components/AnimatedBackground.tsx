@@ -39,7 +39,7 @@ function FloatingElement({
       -1,
       false
     );
-  }, []);
+  }, [delay, animationValue]);
 
   const animatedStyle = useAnimatedStyle(() => {
     const translateY = interpolate(

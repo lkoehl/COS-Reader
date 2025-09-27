@@ -1,4 +1,3 @@
-import { useColorScheme } from "@/hooks/use-color-scheme";
 import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import { LinearGradient } from "expo-linear-gradient";
@@ -25,7 +24,6 @@ export default function ScanButton({
   isLoading = false,
   style,
 }: ScanButtonProps) {
-  const colorScheme = useColorScheme();
   const scaleValue = useSharedValue(1);
   const pulseValue = useSharedValue(0);
 
@@ -42,7 +40,7 @@ export default function ScanButton({
     } else {
       pulseValue.value = withTiming(0, { duration: 300 });
     }
-  }, [isLoading]);
+  }, [isLoading, pulseValue]);
 
   const handlePress = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
@@ -96,7 +94,7 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 32,
     overflow: "hidden",
-    elevation: 2,
+    boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

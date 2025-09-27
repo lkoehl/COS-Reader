@@ -42,7 +42,7 @@ export default function AnimatedScanningIndicator({
       pulseAnimation.value = withTiming(0, { duration: 300 });
       rotateAnimation.value = withTiming(0, { duration: 300 });
     }
-  }, [isScanning]);
+  }, [isScanning, pulseAnimation, rotateAnimation]);
 
   const pulseStyle = useAnimatedStyle(() => {
     const scale = interpolate(pulseAnimation.value, [0, 1], [1, 1.5]);

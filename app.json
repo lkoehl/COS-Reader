@@ -12,10 +12,9 @@
       "supportsTablet": true,
       "icon": "./assets/COS-Reader-Icon.icon",
       "bundleIdentifier": "de.ppheinz.cos-reader",
-      "buildNumber": "9",
+      "buildNumber": "11",
       "infoPlist": {
         "NFCReaderUsageDescription": "Diese App benötigt NFC-Zugriff, um Mensakarten zu lesen.",
-        "NSUserTrackingUsageDescription": "Diese App sammelt keine Tracking-Daten.",
         "ITSAppUsesNonExemptEncryption": false
       },
       "entitlements": {
@@ -33,7 +32,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "versionCode": 9,
+      "versionCode": 11,
       "permissions": [
         "android.permission.NFC"
       ],

@@ -1,4 +1,3 @@
-import { useColorScheme } from "@/hooks/use-color-scheme";
 import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
@@ -15,8 +14,6 @@ export default function GlassCard({
   style,
   intensity = 20,
 }: GlassCardProps) {
-  const colorScheme = useColorScheme();
-
   if (Platform.OS === "web") {
     // Fallback for web platform
     return (
@@ -44,7 +41,7 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 24,
     overflow: "hidden",
-    elevation: 6,
+    boxShadow: "0px 12px 24px rgba(0, 0, 0, 0.2)",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
