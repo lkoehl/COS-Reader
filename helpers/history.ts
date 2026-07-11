@@ -10,6 +10,19 @@ export interface ScanEntry {
 const STORAGE_KEY = "scanHistory";
 const MAX_ENTRIES = 50;
 
+const isScanEntry = (value: unknown): value is ScanEntry => {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+  const entry = value as Record<string, unknown>;
+  return (
+    typeof entry.timestamp === "number" &&
+    Number.isFinite(entry.timestamp) &&
+    typeof entry.balance === "string" &&
+    typeof entry.lastTransaction === "string"
+  );
+};
+
 export const getHistory = async (): Promise<ScanEntry[]> => {
   try {
     const raw = await AsyncStorage.getItem(STORAGE_KEY);
@@ -17,7 +30,11 @@ export const getHistory = async (): Promise<ScanEntry[]> => {
       return [];
     }
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
+    if (!Array.isArray(parsed)) {
+      return [];
+    }
+    // Drop malformed entries (corruption, older formats) so rendering is safe
+    return parsed.filter(isScanEntry).slice(0, MAX_ENTRIES);
   } catch {
     return [];
   }
