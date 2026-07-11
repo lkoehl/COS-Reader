@@ -1,50 +1,53 @@
-# Welcome to your Expo app 👋
+# MensaScan OS (COS-Reader)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern React Native/Expo app for reading Mensa card balances via NFC (MIFARE DESFire).
 
-## Get started
+## Features
 
-1. Install dependencies
+- **NFC Card Reading**: Read Mensa card balances using Near Field Communication
+- **Tap-to-Launch (Android)**: Holding the card against the phone launches the app and scans automatically
+- **Scan History**: Every scan is stored locally; a history screen shows the balance over time with deltas
+- **Modern UI**: Clean, gradient-based glassmorphism design with smooth animations
+- **Dark/Light Mode**: Dedicated dark-mode gradients, switching automatically with the device theme
+- **Haptic Feedback**: Tactile responses for interactions
+- **Settings Screen**: App information, version details, and legal information
 
-   ```bash
-   npm install
-   ```
+## Technology Stack
 
-2. Start the app
+- **React Native** with **Expo SDK 57** (Expo Router)
+- **TypeScript**
+- **react-native-nfc-manager** for NFC (DESFire APDUs)
+- **expo-linear-gradient**, **expo-blur**, **react-native-reanimated** for the UI
+- **@react-native-async-storage/async-storage** for the local scan history
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Development
 
 ```bash
-npm run reset-project
+# Install dependencies
+npm install
+
+# Start development server
+npm start
+
+# Run on iOS
+npm run ios
+
+# Run on Android
+npm run android
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+The native `ios/` and `android/` folders are generated — regenerate them after config changes with:
 
-## Learn more
+```bash
+npx expo prebuild --clean
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+## NFC Requirements
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- **iOS**: Requires iOS 16.4+ with NFC capability
+- **Android**: Requires Android with NFC enabled
+- **Physical device**: NFC functionality requires real device testing
 
-## Join the community
+## License
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+GNU General Public License v3.0 — see license terms in the settings screen.

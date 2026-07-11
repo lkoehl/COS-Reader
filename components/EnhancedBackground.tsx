@@ -1,11 +1,12 @@
-import { Gradients } from "@/constants/theme";
+import { BackgroundGradients, BackgroundVariant } from "@/constants/theme";
+import { useColorScheme } from "@/hooks/use-color-scheme";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { StyleSheet } from "react-native";
 import AnimatedBackground from "./AnimatedBackground";
 
 interface EnhancedBackgroundProps {
-  variant?: "primary" | "cosmic" | "aurora" | "ocean";
+  variant?: BackgroundVariant;
   children: React.ReactNode;
 }
 
@@ -13,22 +14,13 @@ export default function EnhancedBackground({
   variant = "primary",
   children,
 }: EnhancedBackgroundProps) {
-  const getGradientColors = () => {
-    switch (variant) {
-      case "cosmic":
-        return Gradients.cosmic;
-      case "aurora":
-        return Gradients.aurora;
-      case "ocean":
-        return Gradients.ocean;
-      default:
-        return Gradients.primary;
-    }
-  };
+  const colorScheme = useColorScheme();
+  const gradients =
+    BackgroundGradients[colorScheme === "dark" ? "dark" : "light"];
 
   return (
     <LinearGradient
-      colors={getGradientColors() as [string, string, ...string[]]}
+      colors={gradients[variant] as unknown as [string, string, ...string[]]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.container}
