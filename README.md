@@ -42,6 +42,8 @@ The native `ios/` and `android/` folders are generated — regenerate them after
 npx expo prebuild --clean
 ```
 
+> **Note:** Android builds require JDK 17 (e.g. `export JAVA_HOME=$(/usr/libexec/java_home -v 17)`). Newer JDKs (24+) fail in the `react-native-worklets` CMake configure step.
+
 ## NFC Requirements
 
 - **iOS**: Requires iOS 16.4+ with NFC capability
