@@ -2,17 +2,16 @@
   "expo": {
     "name": "MensaScan OS",
     "slug": "COS-Reader",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "mensascanos",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
       "icon": "./assets/COS-Reader-Icon.icon",
       "bundleIdentifier": "de.ppheinz.cos-reader",
-      "buildNumber": "11",
+      "buildNumber": "12",
       "infoPlist": {
         "NFCReaderUsageDescription": "Diese App benötigt NFC-Zugriff, um Mensakarten zu lesen.",
         "ITSAppUsesNonExemptEncryption": false
@@ -30,9 +29,8 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "versionCode": 11,
+      "versionCode": 12,
       "permissions": [
         "android.permission.NFC"
       ],
@@ -55,7 +53,10 @@
             "backgroundColor": "#000000"
           }
         }
-      ]
+      ],
+      "expo-font",
+      "expo-status-bar",
+      "./plugins/withNfcTapLaunch.js"
     ],
     "experiments": {
       "typedRoutes": true,

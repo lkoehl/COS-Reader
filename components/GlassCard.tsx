@@ -1,3 +1,4 @@
+import { useColorScheme } from "@/hooks/use-color-scheme";
 import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
@@ -14,6 +15,11 @@ export default function GlassCard({
   style,
   intensity = 20,
 }: GlassCardProps) {
+  const isDark = useColorScheme() === "dark";
+  const overlayColors: [string, string] = isDark
+    ? ["rgba(255, 255, 255, 0.12)", "rgba(255, 255, 255, 0.04)"]
+    : ["rgba(255, 255, 255, 0.25)", "rgba(255, 255, 255, 0.1)"];
+
   if (Platform.OS === "web") {
     // Fallback for web platform
     return (
@@ -23,9 +29,13 @@ export default function GlassCard({
 
   return (
     <View style={[styles.container, style]}>
-      <BlurView intensity={intensity} style={styles.blur}>
+      <BlurView
+        intensity={intensity}
+        tint={isDark ? "dark" : "light"}
+        style={styles.blur}
+      >
         <LinearGradient
-          colors={["rgba(255, 255, 255, 0.25)", "rgba(255, 255, 255, 0.1)"]}
+          colors={overlayColors}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={styles.gradient}

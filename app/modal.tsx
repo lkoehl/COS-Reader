@@ -1,5 +1,6 @@
 import EnhancedBackground from "@/components/EnhancedBackground";
 import { Ionicons } from "@expo/vector-icons";
+import Constants from "expo-constants";
 import * as Haptics from "expo-haptics";
 import { router } from "expo-router";
 import React from "react";
@@ -52,8 +53,12 @@ export default function SettingsModal() {
             {/* App Info Section */}
             <View style={styles.section}>
               <Text style={styles.appName}>MensaScan OS</Text>
-              <Text style={styles.version}>Version 1.1.0</Text>
-              <Text style={styles.copyright}>© 2020 - 2025 Lukas Köhl</Text>
+              <Text style={styles.version}>
+                Version {Constants.expoConfig?.version ?? "?"}
+              </Text>
+              <Text style={styles.copyright}>
+                © 2020 - {new Date().getFullYear()} Lukas Köhl
+              </Text>
 
               <Pressable
                 style={styles.githubButton}
